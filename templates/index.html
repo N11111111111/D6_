@@ -1,0 +1,30 @@
+{% extends 'flatpages/default.html' %}
+
+{% block content %}
+
+<h2>Страница  пользователя - {{request.user.username}}</h2>
+
+
+{% if is_not_premium %}
+    <button> <a href="sign/upgrade/"> Хочу стать Автором!</a> </button>
+{% else %}
+    <br>
+    <p>Вы имеете статус: Автор</p>
+{% endif %}
+
+
+<button> <a href="sign/logout/">Выйти</a> </button>
+<br>
+<br>
+<h6>Ваши текущие подписки:</h6>
+{% for category in user_category %}
+<br>
+{{ category.name }} - <button><a href="{% url 'unsubscribe'  %}?category_id={{ category.id }}"><u>Отписаться</u></a> </button>
+<br>
+
+
+
+
+{% endfor %}
+
+{% endblock content %}
